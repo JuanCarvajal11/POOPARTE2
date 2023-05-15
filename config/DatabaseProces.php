@@ -15,9 +15,15 @@ class DatabaseProcess extends DatabasePDO
         $this->pass = $pass;
     }
 
+     public function unsetData(){
+        unset($this->user);
+        unset($this->pass);
+        echo '<script>alert("Se han eliminado todos los registros")</script>';
+    }
+
     public function __destruct(){
-         echo '<script>alert("Se han eliminado todos los registros")</script>';
-     }
+        echo '<script>alert("Se han eliminado todos las clases")</script>';
+    }
 
     /*public function recibir(){
         return 'El user es: ' . $this->user . ' Con una contraseña ' . $this->pass;

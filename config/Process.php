@@ -19,6 +19,7 @@
             title: 'Datos Validados Correctamente'
         })
     }
+
     function deteteService() {
         const Toast = Swal.mixin({
             toast: true,
@@ -47,7 +48,7 @@
             showConfirmButton: false
         })
     }
-    
+
     function ErrorUSer() {
         Swal.fire({
             icon: 'error',
@@ -65,7 +66,10 @@
             showConfirmButton: false
         })
     }
-    function go() {
+
+    function go($user) {
+
+
         setTimeout("window.location='../Home.php';", 3000);
     }
 
@@ -75,30 +79,48 @@
 </script>
 
 <?php
-if(isset($_POST['login'])){
+
+if (isset($_POST['login'])) {
     include_once('DatabaseProces.php');
     $user = $_POST['email'];
     $pass = $_POST['pass'];
 
-    $users = new DatabaseProcess($user,$pass);
+    $users = new DatabaseProcess($user, $pass);
     //echo $users->recibir()
     $users->login();
 
     $response = $users->login();
 
-    if ($response==="verdadero") {
-    echo "<font color=\"white\">b</font>";
-    echo "<script>";
-    echo "validate();";
-    echo "go();";
-    echo "</script>";
+    if ($response === "verdadero") {
+        header("Location: ../Home.php?user=" . urlencode($user). "&pass=" . urldecode($pass) );
+    } else {
+        echo "<font color=\"white\">b</font>";
+        echo "<script>";
+        echo "ErrorUSer();";
+        echo "goBackUser();";
+        echo "</script>";
     }
 
-    else{
-    echo "<font color=\"white\">b</font>";
-    echo "<script>";
-    echo "ErrorUSer();";
-    echo "goBackUser();";
-    echo "</script>";
-    }
+    /*    $users->unsetData($users,$response); */
+}
+
+
+if (isset($_POST['logout'])) {
+    include_once('DatabaseProces.php');
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
+
+    $userr = new DatabaseProcess($user, $pass);
+    $userr->unsetData();
+
+    unset($userr);
+
+
+
+    $url ="http://localhost/POOPARTE2/index.php"; // aqui pones la url
+    $tiempo_espera = 10; // Aquí se configura cuántos segundos hasta la actualización.
+    // Declaramos la funcion apra la redirección
+    header("refresh: $tiempo_espera; url=$url");
+
+    // header("Location: ../index.php");
 }
