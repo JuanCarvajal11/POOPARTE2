@@ -92,13 +92,14 @@ if (isset($_POST['login'])) {
     $response = $users->login();
 
     if ($response === "verdadero") {
-        header("Location: ../Home.php?user=" . urlencode($user). "&pass=" . urldecode($pass) );
+        header("Location: ../Home.php?user=" . urlencode($user) . "&pass=" . urldecode($pass));
     } else {
         echo "<font color=\"white\">b</font>";
         echo "<script>";
         echo "ErrorUSer();";
         echo "goBackUser();";
         echo "</script>";
+        unset($users);
     }
 
     /*    $users->unsetData($users,$response); */
@@ -115,12 +116,8 @@ if (isset($_POST['logout'])) {
 
     unset($userr);
 
-
-
-    $url ="../index.php"; // aqui pones la url
+    $url = "../index.php"; // aqui pones la url
     $tiempo_espera = 2; // Aquí se configura cuántos segundos hasta la actualización.
     // Declaramos la funcion apra la redirección
     header("refresh: $tiempo_espera; url=$url");
-
-    // header("Location: ../index.php");
 }
