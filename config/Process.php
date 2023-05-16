@@ -117,8 +117,8 @@ if (isset($_POST['logout'])) {
 
 
 
-    $url ="http://localhost/POOPARTE2/index.php"; // aqui pones la url
-    $tiempo_espera = 10; // Aquí se configura cuántos segundos hasta la actualización.
+    $url ="../index.php"; // aqui pones la url
+    $tiempo_espera = 2; // Aquí se configura cuántos segundos hasta la actualización.
     // Declaramos la funcion apra la redirección
     header("refresh: $tiempo_espera; url=$url");
 

@@ -22,6 +22,8 @@ class DatabaseProcess extends DatabasePDO
     }
 
     public function __destruct(){
+        unset($this->user);
+        unset($this->pass);
         echo '<script>alert("Se han eliminado todos las clases")</script>';
     }
 
